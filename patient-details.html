@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details - Project Anvay</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fafafa;
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header matching your design */
+        header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .patient-header {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .header-content {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 2rem;
+        }
+
+        .patient-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .patient-title h1 {
+            font-size: 2rem;
+            color: white;
+            margin: 0;
+        }
+
+        .patient-id-display {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            opacity: 0.9;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .patient-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 0.25rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 0;
+        }
+
+        .edit-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            background: #45a049;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .info-value.empty {
+            color: #999;
+            font-style: italic;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .bmi-display {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .bmi-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .bmi-category {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .prakriti-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            text-transform: capitalize;
+            color: white;
+        }
+
+        .prakriti-vata { background: linear-gradient(135deg, #8B5A2B, #A0522D); }
+        .prakriti-pitta { background: linear-gradient(135deg, #FF6B35, #F7931E); }
+        .prakriti-kapha { background: linear-gradient(135deg, #4A90E2, #357ABD); }
+        .prakriti-mixed { background: linear-gradient(135deg, #9B59B6, #8E44AD); }
+
+        /* Progress Notes Section */
+        .progress-section {
+            margin-top: 2rem;
+        }
+
+        .progress-notes {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .progress-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-header h3 {
+            margin: 0;
+            color: white;
+        }
+
+        .progress-body {
+            padding: 1.5rem;
+        }
+
+        .notes-display {
+            min-height: 100px;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border: 2px solid #e0e0e0;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .notes-edit {
+            display: none;
+        }
+
+        .notes-edit textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            resize: vertical;
+            font-family: inherit;
+            line-height: 1.6;
+        }
+
+        .notes-edit textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .notes-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #45a049;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .timestamps {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 3rem;
+            color: #dc3545;
+            background: #f8d7da;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .patient-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .patient-meta {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .notes-actions {
+                flex-direction: column;
+            }
+
+            .header-nav {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .patient-meta {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-nav">
+            <div class="logo">Project Anvay</div>
+            <div class="nav-actions">
+                <a href="patients-list.html" class="nav-link">← Back to Patients</a>
+                <a href="patient-form.html" class="nav-link">+ Add New</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="loadingState" class="loading">
+            <h2>Loading patient details...</h2>
+        </div>
+
+        <div id="errorState" class="error" style="display: none;">
+            <h2>Patient Not Found</h2>
+            <p>The requested patient record could not be found.</p>
+            <a href="patients-list.html" class="btn btn-primary" style="margin-top: 1rem; display: inline-block; text-decoration: none;">Back to Patient List</a>
+        </div>
+
+        <div id="patientContent" style="display: none;">
+            <!-- Patient Header -->
+            <div class="patient-header">
+                <div class="header-content">
+                    <div class="patient-title">
+                        <h1 id="patientName">Patient Name</h1>
+                        <div class="patient-id-display" id="patientIdDisplay">PAT-ID</div>
+                    </div>
+                    <div class="patient-meta">
+                        <div class="meta-item">
+                            <div class="meta-label">Age</div>
+                            <div class="meta-value" id="patientAge">-</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Gender</div>
+                            <div class="meta-value" id="patientGender">-</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Prakriti</div>
+                            <div class="meta-value" id="patientPrakriti">-</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">BMI</div>
+                            <div class="meta-value" id="patientBMI">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <!-- Basic Information -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Basic Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-label">Full Name</div>
+                                <div class="info-value" id="displayName">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Patient ID</div>
+                                <div class="info-value" id="displayPatientId">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Age</div>
+                                <div class="info-value" id="displayAge">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Gender</div>
+                                <div class="info-value" id="displayGender">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Contact Number</div>
+                                <div class="info-value" id="displayContact">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Email</div>
+                                <div class="info-value" id="displayEmail">-</div>
+                            </div>
+                            <div class="info-item full-width">
+                                <div class="info-label">Address</div>
+                                <div class="info-value" id="displayAddress">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ayurvedic Profile -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Ayurvedic Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-label">Prakriti Type</div>
+                                <div id="displayPrakritiType">-</div>
+                            </div>
+                            <div class="info-item full-width">
+                                <div class="info-label">Dietary Preferences/Restrictions</div>
+                                <div class="info-value" id="displayDietary">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Information -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Health Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-label">Weight</div>
+                                <div class="info-value" id="displayWeight">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Height</div>
+                                <div class="info-value" id="displayHeight">-</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">BMI</div>
+                                <div id="displayBMI">-</div>
+                            </div>
+                            <div class="info-item full-width">
+                                <div class="info-label">Diseases/Conditions</div>
+                                <div class="info-value" id="displayDiseases">-</div>
+                            </div>
+                            <div class="info-item full-width">
+                                <div class="info-label">Current Medications</div>
+                                <div class="info-value" id="displayMedications">-</div>
+                            </div>
+                            <div class="info-item full-width">
+                                <div class="info-label">Medical History</div>
+                                <div class="info-value" id="displayHistory">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Notes Section -->
+            <div class="progress-section">
+                <div class="progress-notes">
+                    <div class="progress-header">
+                        <h3>Progress Notes</h3>
+                        <button id="editNotesBtn" class="edit-btn">Edit Notes</button>
+                    </div>
+                    <div class="progress-body">
+                        <div id="notesDisplay" class="notes-display">No progress notes available.</div>
+                        <div id="notesEdit" class="notes-edit">
+                            <textarea id="progressNotesTextarea" placeholder="Enter progress notes..."></textarea>
+                            <div class="notes-actions">
+                                <button id="saveNotesBtn" class="btn btn-primary">Save Changes</button>
+                                <button id="cancelNotesBtn" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timestamps -->
+            <div class="timestamps">
+                <div><strong>Created:</strong> <span id="createdAt">-</span></div>
+                <div><strong>Last Updated:</strong> <span id="lastUpdated">-</span></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button id="deletePatientBtn" class="btn btn-danger">Delete Patient</button>
+                <a href="patients-list.html" class="btn btn-secondary" style="text-decoration: none;">Back to List</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="patients.js"></script>
+    <script>
+        let currentPatient = null;
+        let isEditingNotes = false;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPatientDetails();
+            setupEventListeners();
+        });
+
+        function loadPatientDetails() {
+            // Get patient ID from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const patientId = urlParams.get('id');
+
+            if (!patientId) {
+                showError();
+                return;
+            }
+
+            // Load patient data
+            currentPatient = getPatientById(patientId);
+
+            if (!currentPatient) {
+                showError();
+                return;
+            }
+
+            displayPatientDetails(currentPatient);
+            hideLoading();
+        }
+
+        function displayPatientDetails(patient) {
+            // Header information
+            document.getElementById('patientName').textContent = patient.fullName || 'Unknown Patient';
+            document.getElementById('patientIdDisplay').textContent = patient.patientId || '-';
+            document.getElementById('patientAge').textContent = patient.age || '-';
+            document.getElementById('patientGender').textContent = capitalizeFirst(patient.gender) || '-';
+            document.getElementById('patientPrakriti').textContent = capitalizeFirst(patient.prakritiType) || '-';
+            
+            // BMI in header
+            if (patient.bmi) {
+                document.getElementById('patientBMI').textContent = `${patient.bmi} (${patient.bmiCategory || 'Unknown'})`;
+            }
+
+            // Basic Information
+            document.getElementById('displayName').textContent = patient.fullName || '-';
+            document.getElementById('displayPatientId').textContent = patient.patientId || '-';
+            document.getElementById('displayAge').textContent = patient.age || '-';
+            document.getElementById('displayGender').textContent = capitalizeFirst(patient.gender) || '-';
+            document.getElementById('displayContact').textContent = patient.contactNumber || '-';
+            setValueOrEmpty('displayEmail', patient.email);
+            setValueOrEmpty('displayAddress', patient.address);
+
+            // Ayurvedic Profile
+            displayPrakritiType(patient.prakritiType);
+            setValueOrEmpty('displayDietary', patient.dietaryPreferences);
+
+            // Health Information
+            document.getElementById('displayWeight').textContent = patient.weight ? `${patient.weight} kg` : '-';
+            document.getElementById('displayHeight').textContent = patient.height ? `${patient.height} cm` : '-';
+            displayBMI(patient.bmi, patient.bmiCategory);
+            setValueOrEmpty('displayDiseases', patient.diseases);
+            setValueOrEmpty('displayMedications', patient.medications);
+            setValueOrEmpty('displayHistory', patient.medicalHistory);
+
+            // Progress Notes
+            const notesDisplay = document.getElementById('notesDisplay');
+            notesDisplay.textContent = patient.progressNotes || 'No progress notes available.';
+            document.getElementById('progressNotesTextarea').value = patient.progressNotes || '';
+
+            // Timestamps
+            document.getElementById('createdAt').textContent = formatDate(patient.createdAt);
+            document.getElementById('lastUpdated').textContent = formatDate(patient.lastUpdated);
+        }
+
+        function displayPrakritiType(prakriti) {
+            const container = document.getElementById('displayPrakritiType');
+            if (prakriti) {
+                container.innerHTML = `<span class="prakriti-badge prakriti-${prakriti.toLowerCase()}">${capitalizeFirst(prakriti)}</span>`;
+            } else {
+                container.textContent = '-';
+            }
+        }
+
+        function displayBMI(bmi, category) {
+            const container = document.getElementById('displayBMI');
+            if (bmi) {
+                container.innerHTML = `
+                    <div class="bmi-display">
+                        <span class="bmi-value">${bmi}</span>
+                        <span class="bmi-category">${category || 'Unknown'}</span>
+                    </div>
+                `;
+            } else {
+                container.textContent = '-';
+            }
+        }
+
+        function setValueOrEmpty(elementId, value) {
+            const element = document.getElementById(elementId);
+            if (value && value.trim()) {
+                element.textContent = value;
+                element.classList.remove('empty');
+            } else {
+                element.textContent = 'Not specified';
+                element.classList.add('empty');
+            }
+        }
+
+        function capitalizeFirst(str) {
+            if (!str) return str;
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function setupEventListeners() {
+            // Edit notes functionality
+            document.getElementById('editNotesBtn').addEventListener('click', startEditingNotes);
+            document.getElementById('saveNotesBtn').addEventListener('click', saveProgressNotes);
+            document.getElementById('cancelNotesBtn').addEventListener('click', cancelEditingNotes);
+            
+            // Delete patient
+            document.getElementById('deletePatientBtn').addEventListener('click', deletePatientRecord);
+        }
+
+        function startEditingNotes() {
+            isEditingNotes = true;
+            document.getElementById('notesDisplay').style.display = 'none';
+            document.getElementById('notesEdit').style.display = 'block';
+            document.getElementById('editNotesBtn').textContent = 'Editing...';
+            document.getElementById('editNotesBtn').disabled = true;
+            document.getElementById('progressNotesTextarea').focus();
+        }
+
+        function saveProgressNotes() {
+            const newNotes = document.getElementById('progressNotesTextarea').value;
+            
+            // Update current patient data
+            currentPatient.progressNotes = newNotes;
+            
+            // Save to localStorage
+            if (savePatient(currentPatient)) {
+                // Update display
+                document.getElementById('notesDisplay').textContent = newNotes || 'No progress notes available.';
+                document.getElementById('lastUpdated').textContent = formatDate(new Date().toISOString());
+                
+                showNotification('Progress notes updated successfully!', 'success');
+                cancelEditingNotes();
+            } else {
+                showNotification('Error saving progress notes. Please try again.', 'error');
+            }
+        }
+
+        function cancelEditingNotes() {
+            isEditingNotes = false;
+            document.getElementById('notesDisplay').style.display = 'block';
+            document.getElementById('notesEdit').style.display = 'none';
+            document.getElementById('editNotesBtn').textContent = 'Edit Notes';
+            document.getElementById('editNotesBtn').disabled = false;
+            
+            // Reset textarea to original value
+            document.getElementById('progressNotesTextarea').value = currentPatient.progressNotes || '';
+        }
+
+        function deletePatientRecord() {
+            if (!currentPatient) return;
+            
+            const confirmDelete = confirm(
+                `Are you sure you want to delete the patient record for "${currentPatient.fullName}"?\n\nThis action cannot be undone.`
+            );
+            
+            if (confirmDelete) {
+                if (deletePatient(currentPatient.patientId)) {
+                    showNotification('Patient record deleted successfully.', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'patients-list.html';
+                    }, 1500);
+                } else {
+                    showNotification('Error deleting patient record. Please try again.', 'error');
+                }
+            }
+        }
+
+        function showError() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
+            document.getElementById('patientContent').style.display = 'none';
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'none';
+            document.getElementById('patientContent').style.display = 'block';
+        }
+
+        // Prevent leaving page while editing
+        window.addEventListener('beforeunload', function(e) {
+            if (isEditingNotes) {
+                e.preventDefault();
+                e.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
+                return e.returnValue;
+            }
+        });
+    </script>
+</body>
+</html>

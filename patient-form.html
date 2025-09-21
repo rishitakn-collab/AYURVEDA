@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Patient - Project Anvay</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fafafa;
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header matching your design */
+        header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-back {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-back:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .form-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .form-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .form-body {
+            padding: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2e7d32;
+        }
+
+        input, select, textarea {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .readonly {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+        }
+
+        .bmi-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .bmi-result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border-radius: 5px;
+            min-height: 52px;
+            justify-content: center;
+        }
+
+        .bmi-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .bmi-category {
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 2px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bmi-group {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .header-nav {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-nav">
+            <div class="logo">Project Anvay</div>
+            <a href="patients-list.html" class="nav-back">← View Patients</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="form-card">
+            <div class="form-header">
+                <h1>Add New Patient</h1>
+                <p>Enter patient information to create a new medical record</p>
+            </div>
+            <div class="form-body">
+                <form id="patientForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="patientId">Patient ID</label>
+                            <input type="text" id="patientId" name="patientId" readonly class="readonly">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age">Age *</label>
+                            <input type="number" id="age" name="age" min="1" max="150" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Gender *</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactNumber">Contact Number *</label>
+                            <input type="tel" id="contactNumber" name="contactNumber" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="address">Address</label>
+                            <textarea id="address" name="address" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="prakritiType">Prakriti Type *</label>
+                            <select id="prakritiType" name="prakritiType" required>
+                                <option value="">Select Prakriti</option>
+                                <option value="vata">Vata</option>
+                                <option value="pitta">Pitta</option>
+                                <option value="kapha">Kapha</option>
+                                <option value="mixed">Mixed</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="diseases">Diseases/Conditions</label>
+                            <textarea id="diseases" name="diseases" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="medications">Current Medications</label>
+                            <textarea id="medications" name="medications" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="medicalHistory">Medical History</label>
+                            <textarea id="medicalHistory" name="medicalHistory" rows="4"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="dietaryPreferences">Dietary Preferences/Restrictions</label>
+                            <textarea id="dietaryPreferences" name="dietaryPreferences" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Weight & Height (BMI Auto-calculated)</label>
+                            <div class="bmi-group">
+                                <div>
+                                    <label for="weight" style="margin-bottom: 0.5rem;">Weight (kg)</label>
+                                    <input type="number" id="weight" name="weight" step="0.1" min="1">
+                                </div>
+                                <div>
+                                    <label for="height" style="margin-bottom: 0.5rem;">Height (cm)</label>
+                                    <input type="number" id="height" name="height" step="0.1" min="30">
+                                </div>
+                                <div class="bmi-result">
+                                    <div class="bmi-value" id="bmiValue">-</div>
+                                    <div class="bmi-category" id="bmiCategory">BMI</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="progressNotes">Progress Notes</label>
+                            <textarea id="progressNotes" name="progressNotes" rows="4" placeholder="Enter initial assessment or notes..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Patient</button>
+                        <a href="patients-list.html" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="patients.js"></script>
+    <script>
+        // Initialize form
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate patient ID
+            document.getElementById('patientId').value = generatePatientId();
+            
+            // BMI calculation
+            const weightInput = document.getElementById('weight');
+            const heightInput = document.getElementById('height');
+            const bmiValue = document.getElementById('bmiValue');
+            const bmiCategory = document.getElementById('bmiCategory');
+            
+            function updateBMI() {
+                const weight = parseFloat(weightInput.value);
+                const height = parseFloat(heightInput.value);
+                
+                if (weight && height) {
+                    const bmi = calculateBMI(weight, height);
+                    const category = getBMICategory(bmi);
+                    
+                    bmiValue.textContent = bmi;
+                    bmiCategory.textContent = category;
+                } else {
+                    bmiValue.textContent = '-';
+                    bmiCategory.textContent = 'BMI';
+                }
+            }
+            
+            weightInput.addEventListener('input', updateBMI);
+            heightInput.addEventListener('input', updateBMI);
+            
+            // Form submission
+            document.getElementById('patientForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const patientData = {};
+                
+                // Convert FormData to object
+                for (let [key, value] of formData.entries()) {
+                    patientData[key] = value.trim();
+                }
+                
+                // Add BMI data
+                if (patientData.weight && patientData.height) {
+                    patientData.bmi = calculateBMI(patientData.weight, patientData.height);
+                    patientData.bmiCategory = getBMICategory(patientData.bmi);
+                }
+                
+                // Validate form
+                const errors = validatePatientForm(patientData);
+                
+                if (errors.length > 0) {
+                    showNotification('Please fix the following errors:\n• ' + errors.join('\n• '), 'error');
+                    return;
+                }
+                
+                // Save patient
+                if (savePatient(patientData)) {
+                    showNotification('Patient saved successfully!', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'patients-list.html';
+                    }, 1500);
+                } else {
+                    showNotification('Error saving patient. Please try again.', 'error');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

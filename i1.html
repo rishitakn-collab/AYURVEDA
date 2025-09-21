@@ -46,7 +46,6 @@
             font-size: 1.8rem;
             font-weight: bold;
         }
-        
 
         .nav-links {
             display: flex;
@@ -342,82 +341,6 @@
         html {
             scroll-behavior: smooth;
         }
-        /* Dropdown Styles */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-toggle {
-    cursor: pointer;
-    position: relative;
-}
-
-.dropdown-toggle::after {
-    content: '▼';
-    font-size: 0.8em;
-    margin-left: 5px;
-    transition: transform 0.3s ease;
-}
-
-.dropdown:hover .dropdown-toggle::after {
-    transform: rotate(180deg);
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    min-width: 200px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 1001;
-    list-style: none;
-    padding: 0;
-}
-
-.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-item {
-    display: block;
-    padding: 12px 16px;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
-.dropdown-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-}
-
-/* Mobile dropdown adjustments */
-@media (max-width: 768px) {
-    .dropdown-menu {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        box-shadow: none;
-        background: rgba(255, 255, 255, 0.1);
-        margin-top: 0;
-        border-radius: 0;
-    }
-    
-    .dropdown-toggle::after {
-        display: none;
-    }
-}
     </style>
 </head>
 <body>
@@ -428,17 +351,8 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#features">Features</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">Patient Info</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="patient-form.html" class="dropdown-item">Add New Patient</a></li>
-                        <li><a href="patients-list.html" class="dropdown-item">View Old Patients</a></li>
-                    </ul>
-                </li>
                 <li><a href="#impact">Impact</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="signup.html">Sign Up</a></li>
             </ul>
             <div class="mobile-menu" onclick="toggleMenu()">
                 <span></span>
@@ -456,6 +370,18 @@
                     <h1>Revolutionizing Ayurvedic Diet Management</h1>
                     <p>Combining ancient wisdom with modern technology to create personalized, scientifically-backed Ayurvedic diet charts for optimal health and wellness.</p>
                     <a href="#about" class="cta-button">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2>About Project Anvay</h2>
+                    <p>Manual Ayurvedic diet charts are inefficient and lack scientific precision. Traditional methods often rely on generalized approaches that don't account for individual variations and modern nutritional understanding.</p>
+                    <p>Our software automates patient-specific Ayurvedic diet charts by combining modern nutrition data with traditional principles, ensuring each recommendation is both scientifically sound and rooted in time-tested Ayurvedic wisdom.</p>
+                    <p>We bridge the gap between ancient knowledge and contemporary healthcare needs, making personalized Ayurvedic nutrition accessible, accurate, and efficient for practitioners and patients alike.</p>
                 </div>
             </div>
         </section>
@@ -524,18 +450,6 @@
                         <h3>Universal Accessibility</h3>
                         <p>Cloud-based platform accessible from anywhere, making quality Ayurvedic care available globally.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="about">
-            <div class="container">
-                <div class="about-content">
-                    <h2>About Project Anvay</h2>
-                    <p>Manual Ayurvedic diet charts are inefficient and lack scientific precision. Traditional methods often rely on generalized approaches that don't account for individual variations and modern nutritional understanding.</p>
-                    <p>Our software automates patient-specific Ayurvedic diet charts by combining modern nutrition data with traditional principles, ensuring each recommendation is both scientifically sound and rooted in time-tested Ayurvedic wisdom.</p>
-                    <p>We bridge the gap between ancient knowledge and contemporary healthcare needs, making personalized Ayurvedic nutrition accessible, accurate, and efficient for practitioners and patients alike.</p>
                 </div>
             </div>
         </section>
