@@ -180,3 +180,12 @@ function showNotification(message, type = 'success') {
         }
     }, 5000);
 }
+function toggleHerb(element) {
+  const details = element.querySelector('.herb-details');
+  if (details) {
+    details.style.display = details.style.display === 'block' ? 'none' : 'block';
+  }
+}
+
+// Optional: Initially hide all herb-details
+document.querySelectorAll('.herb-details').forEach(d => d.style.display = 'none');

@@ -95,3 +95,29 @@
 .dropdown a:hover {
     text-decoration: underline;
 }
+.hero {
+    background-image: url('https://media.istockphoto.com/id/521262744/photo/spices-and-nuts-at-wooden-table.jpg?s=612x612&w=0&k=20&c=HvhJn_I7S8qwkW0gueDFeCYbSFgLkPUAsgbQsnnpuV4=');
+    background-size: cover;       /* Make sure it covers the whole section */
+    background-position: center;  /* Center the image */
+    background-repeat: no-repeat; /* Prevent tiling */
+    height: 100vh;                /* Full viewport height */
+    display: flex;
+    align-items: center;          /* Vertically center content */
+    justify-content: center;      /* Horizontally center content */
+    position: relative;
+    color: white;                 /* Text color */
+    text-align: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Optional dark overlay for readability */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Make sure content is above overlay */
+}

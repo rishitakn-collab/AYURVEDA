@@ -79,6 +79,69 @@
             transition: 0.3s;
         }
 
+        /* Navigation Dropdown Styles */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-toggle {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-dropdown-toggle::after {
+            content: '▼';
+            font-size: 0.8em;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            min-width: 200px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-dropdown-menu li {
+            margin: 0;
+        }
+
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 12px 16px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
         /* Main Content */
         main {
             margin-top: 80px;
@@ -111,7 +174,7 @@
 
         /* Home Section */
         .hero {
-            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            background: linear-gradient(135deg, #cae9ca 0%, #053a07 100%);
             text-align: center;
             padding: 6rem 0;
         }
@@ -124,7 +187,7 @@
         .hero p {
             font-size: 1.3rem;
             margin-bottom: 2rem;
-            color: #555;
+            color: #dddada;
         }
 
         .cta-button {
@@ -156,7 +219,7 @@
 
         /* Features Section */
         .features {
-            background: #f8f9fa;
+            background: #fafcfa;
         }
 
         .features-grid {
@@ -303,6 +366,22 @@
                 display: flex;
             }
 
+            /* Mobile dropdown adjustments */
+            .nav-dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(255, 255, 255, 0.1);
+                margin-top: 0;
+                border-radius: 0;
+            }
+            
+            .nav-dropdown-toggle::after {
+                display: none;
+            }
+
             h1 {
                 font-size: 2.5rem;
             }
@@ -342,82 +421,150 @@
         html {
             scroll-behavior: smooth;
         }
-        /* Dropdown Styles */
-.dropdown {
+
+        /* Voice Assistant Styles */
+        #voice-assistant {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            text-align: center;
+            z-index: 2000;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        /* Assistant name */
+        #va-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+            background: linear-gradient(135deg, #039665, #03a037);
+            padding: 6px 12px;
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Mic button */
+        #micBtn {
+            background: linear-gradient(135deg, #046d23, #09db59);
+            border: none;
+            border-radius: 50%;
+            width: 75px;
+            height: 75px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        #micBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+        }
+
+        /* Output box */
+        #va-output {
+            margin-top: 12px;
+            font-size: 0.95rem;
+            background: #ffffff;
+            color: #333;
+            padding: 8px 14px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            display: none;
+            min-width: 160px;
+        }
+
+        /* Flashcards */
+        .flashcards {
+            display: flex;
+            justify-content: space-around;
+            margin: 50px auto;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .card {
+            width: 300px;
+            background: #f9f9f9;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card h2 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .dropdown {
+            display: none;
+            margin-top: 15px;
+        }
+        .dropdown p, .dropdown a {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+        }
+        .dropdown a:hover {
+            text-decoration: underline;
+        }
+
+        .herb-list {
+            margin-top: 15px;
+        }
+        .herb {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            cursor: pointer;
+        }
+        .herb h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+        .herb-details {
+            display: none;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #444;
+            line-height: 1.5;
+        }
+        .herb.active .herb-details {
+            display: block;
+        }
+        .hero {
+    background-image: url('https://media.istockphoto.com/id/521262744/photo/spices-and-nuts-at-wooden-table.jpg?s=612x612&w=0&k=20&c=HvhJn_I7S8qwkW0gueDFeCYbSFgLkPUAsgbQsnnpuV4=');
+    background-size: cover;       /* Make sure it covers the whole section */
+    background-position: center;  /* Center the image */
+    background-repeat: no-repeat; /* Prevent tiling */
+    height: 100vh;                /* Full viewport height */
+    display: flex;
+    align-items: center;          /* Vertically center content */
+    justify-content: center;      /* Horizontally center content */
     position: relative;
+    color: white;                 /* Text color */
+    text-align: center;
 }
 
-.dropdown-toggle {
-    cursor: pointer;
-    position: relative;
-}
-
-.dropdown-toggle::after {
-    content: '▼';
-    font-size: 0.8em;
-    margin-left: 5px;
-    transition: transform 0.3s ease;
-}
-
-.dropdown:hover .dropdown-toggle::after {
-    transform: rotate(180deg);
-}
-
-.dropdown-menu {
+.hero::before {
+    content: "";
     position: absolute;
-    top: 100%;
-    left: 0;
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    min-width: 200px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 1001;
-    list-style: none;
-    padding: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.8); /* Optional dark overlay for readability */
+    z-index: 1;
 }
 
-.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+.hero-content {
+    position: relative;
+    z-index: 2; /* Make sure content is above overlay */
 }
 
-.dropdown-item {
-    display: block;
-    padding: 12px 16px;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
-.dropdown-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-}
-
-/* Mobile dropdown adjustments */
-@media (max-width: 768px) {
-    .dropdown-menu {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        box-shadow: none;
-        background: rgba(255, 255, 255, 0.1);
-        margin-top: 0;
-        border-radius: 0;
-    }
-    
-    .dropdown-toggle::after {
-        display: none;
-    }
-}
     </style>
 </head>
 <body>
@@ -467,6 +614,7 @@
                 </div>
             </div>
         </section>
+
        <!-- Floating Voice Assistant -->
 <div id="voice-assistant">
   <div id="va-name">🪷 Anvay Assistant</div>
@@ -474,268 +622,69 @@
   <div id="va-output">Say something...</div>
 </div>
 
-<style>
-  /* Voice Assistant Styles */
-  #voice-assistant {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    text-align: center;
-    z-index: 2000;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-  }
-
-  /* Assistant name */
-  #va-name {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #fff;
-    background: linear-gradient(135deg, #039665, #03a037);
-    padding: 6px 12px;
-    border-radius: 12px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-  }
-
-  /* Mic button */
-  #micBtn {
-    background: linear-gradient(135deg, #046d23, #09db59);
-    border: none;
-    border-radius: 50%;
-    width: 75px;
-    height: 75px;
-    font-size: 2rem;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  #micBtn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-  }
-
-  /* Output box */
-  #va-output {
-    margin-top: 12px;
-    font-size: 0.95rem;
-    background: #ffffff;
-    color: #333;
-    padding: 8px 14px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-    display: none; /* Hidden until used */
-    min-width: 160px;
-  }
-</style>
-
-<script>
-  // Voice Assistant Logic
-  const micBtn = document.getElementById("micBtn");
-  const output = document.getElementById("va-output");
-
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const recognition = new SpeechRecognition();
-  recognition.lang = "en-IN";
-  recognition.interimResults = false;
-
-  micBtn.addEventListener("click", () => {
-    recognition.start();
-    output.style.display = "block";
-    output.textContent = "🎤 Listening...";
-  });
-
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript.toLowerCase();
-    output.textContent = "You: " + transcript;
-
-    // Basic responses
-    let response = "Sorry, I didn’t get that.";
-    if (transcript.includes("hello")) response = "Hello! I am Anvay Assistant, here to help you.";
-    if (transcript.includes("diet")) response = "Click on Generate Diet Plans to get your personalized Ayurvedic diet.";
-    if (transcript.includes("features")) response = "Key features include AI diet generation, voice assistant, and mobile support.";
-    if (transcript.includes("contact")) response = "You can reach us via the Contact section below.";
-    if (transcript.includes("home")) window.location.href = "#home";
-    if (transcript.includes("about")) window.location.href = "#about";
-    if (transcript.includes("contact")) window.location.href = "#contact";
-
-    // Speak back
-    const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance(response);
-    synth.speak(utterance);
-
-    // Show assistant's response
-    setTimeout(() => {
-      output.textContent = "Anvay: " + response;
-    }, 1000);
-  };
-
-  recognition.onerror = (event) => {
-    output.textContent = "Error: " + event.error;
-  };
-</script>
         <!-- Flashcards Section -->
+<!-- Flashcards Section -->
 <section class="flashcards">
-  <div class="card" onclick="event.stopPropagation()">
-  <h2>🌿 Herbs</h2>
-  <div class="herb-list">
-    <div class="herb" onclick="toggleHerb(this)">
-      <h3>Hing (Asafoetida)</h3>
-      <p class="herb-details">
-        A powerhouse spice that keeps your blood flowing smoothly while helping manage high blood pressure. 
-        It sparks the nervous system into action, easing convulsions, syncope, and hysteria. 
-        Plus, it’s a digestive champion—boosting appetite, releasing trapped gas, and soothing spasms naturally.
-      </p>
-    </div>
-    <div class="herb" onclick="toggleHerb(this)">
-      <h3>Moringa – The Miracle Tree</h3>
-      <p class="herb-details">
-        Packed with vitamins A, C, E, calcium, potassium, and protein, moringa is a nutritional powerhouse. 
-        Its antioxidants battle cellular damage, while anti-inflammatory compounds soothe arthritis and other aches. 
-        From speeding up wound healing to supporting blood sugar, liver, kidney, and even respiratory health, 
-        moringa is a natural multitasker for total wellness.
-      </p>
-    </div>
-    <div class="herb" onclick="toggleHerb(this)">
-      <h3>Basil – The Healing Leaf</h3>
-      <p class="herb-details">
-        Packed with antioxidants like eugenol and lutein, basil fights cellular damage and supports heart and immune health. 
-        Its anti-inflammatory and digestive-boosting properties ease aches and stomach troubles, while holy basil helps the body adapt to stress. 
-        Bonus: it naturally battles bacteria, keeping you healthy inside and out.
-      </p>
-    </div>
-    <div class="herb" onclick="toggleHerb(this)">
-      <h3>Cilantro – The Zesty Detoxer</h3>
-      <p class="herb-details">
-        Bursting with antioxidants and essential nutrients, cilantro shields your body from oxidative stress while supporting digestion. 
-        It helps manage blood sugar, fights harmful microbes, and even aids in detoxifying heavy metals. 
-        Bonus perk: its calming properties may help ease anxiety naturally.
-      </p>
-    </div>
-    <div class="herb" onclick="toggleHerb(this)">
-      <h3>Turmeric (Curcumin) – Golden Healer</h3>
-      <p class="herb-details">
-        Turmeric packs powerful antioxidant punch, neutralizing harmful free radicals while boosting your body’s defenses. 
-        Its anti-inflammatory magic soothes chronic inflammation, supports digestion, skin, and immunity, 
-        while also nurturing brain health.
-      </p>
-    </div>
-    <div class="herb" onclick="toggleHerb(this)">
-      <h3>Kalonji (Nigella sativa)</h3>
-      <p class="herb-details">
-        Supports digestion by reducing bloating, gas, and indigestion. Helps regulate blood sugar, improves cholesterol, 
-        boosts immunity, supports skin and hair health, and shows anticancer potential with thymoquinone.
-      </p>
-    </div>
-  </div>
-</div>
-
-<style>
-.herb-list {
-  margin-top: 15px;
-}
-.herb {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-  cursor: pointer;
-}
-.herb h3 {
-  margin: 0;
-  font-size: 16px;
-}
-.herb-details {
-  display: none;
-  margin-top: 8px;
-  font-size: 14px;
-  color: #444;
-  line-height: 1.5;
-}
-.herb.active .herb-details {
-  display: block;
-}
-</style>
-
-<script>
-function toggleHerb(el) {
-  // Collapse all
-  document.querySelectorAll('.herb').forEach(h => h.classList.remove('active'));
-  // Expand selected
-  el.classList.add('active');
-}
-</script>
-
-  <div class="card" onclick="toggleDropdown('body')">
-    <h2>🧘 Body Types</h2>
-    <div class="dropdown" id="body">
-      <a href="generate.html">Vata</a>
-      <a href="generate.html">Pitta</a>
-      <a href="generate.html">Kapha</a>
+  <!-- Herbs Card (unchanged) -->
+  <div class="card">
+    <h2>Herbs</h2>
+    <div class="herb-list">
+      <div class="herb" onclick="toggleHerb(this)">
+        <h3>Hing (Asafoetida)</h3>
+        <p class="herb-details">A powerhouse spice that keeps your blood flowing smoothly...</p>
+      </div>
+      <div class="herb" onclick="toggleHerb(this)">
+        <h3>Moringa – The Miracle Tree</h3>
+        <p class="herb-details">Packed with vitamins A, C, E, calcium, potassium...</p>
+      </div>
+      <div class="herb" onclick="toggleHerb(this)"> <h3>Basil – The Healing Leaf</h3> <p class="herb-details"> Packed with antioxidants like eugenol and lutein, basil fights cellular damage and supports heart and immune health. Its anti-inflammatory and digestive-boosting properties ease aches and stomach troubles, while holy basil helps the body adapt to stress. Bonus: it naturally battles bacteria, keeping you healthy inside and out. </p> </div> <div class="herb" onclick="toggleHerb(this)"> <h3>Cilantro – The Zesty Detoxer</h3> <p class="herb-details"> Bursting with antioxidants and essential nutrients, cilantro shields your body from oxidative stress while supporting digestion. It helps manage blood sugar, fights harmful microbes, and even aids in detoxifying heavy metals. Bonus perk: its calming properties may help ease anxiety naturally. </p> </div>
+      <!-- Other herbs -->
     </div>
   </div>
 
-  <div class="card" onclick="toggleDropdown('diet')">
-    <h2>🥗 Diet Plans</h2>
-    <div class="dropdown" id="diet">
-      <a href="generate.html">Beginner</a>
-      <a href="generate.html">Balanced</a>
-      <a href="generate.html">Weight Loss</a>
-      <a href="generate.html">Custom</a>
+  <!-- Body Types Card -->
+  <div class="card" onclick="toggleHerb(this)">
+    <h2>Body Types</h2>
+    <div class="herb-list">
+      <div class="herb">
+        <h3>Vata</h3>
+        <p class="herb-details">Vata types benefit from warm, grounding foods, regular routines, and calming practices.</p>
+      </div>
+      <div class="herb">
+        <h3>Pitta</h3>
+        <p class="herb-details">Pitta types thrive with cooling foods, stress management, and moderate exercise.</p>
+      </div>
+      <div class="herb">
+        <h3>Kapha</h3>
+        <p class="herb-details">Kapha types do best with light, warm foods, stimulating activities, and dynamic routines.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diet Plans Card -->
+  <div class="card" onclick="toggleHerb(this)">
+    <h2>Diet Plans</h2>
+    <div class="herb-list">
+      <div class="herb">
+        <h3>Beginner</h3>
+        <p class="herb-details">Simple diet plan for beginners focusing on balanced nutrition and gradual lifestyle changes.</p>
+      </div>
+      <div class="herb">
+        <h3>Balanced</h3>
+        <p class="herb-details">A diet plan that balances all nutrients for overall wellness and energy maintenance.</p>
+      </div>
+      <div class="herb">
+        <h3>Weight Loss</h3>
+        <p class="herb-details">Calorie-conscious diet plan targeting healthy weight loss with sustainable habits.</p>
+      </div>
+      <div class="herb">
+        <h3>Custom</h3>
+        <p class="herb-details">Personalized diet plan tailored to your body type, preferences, and health goals.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<style>
-.flashcards {
-  display: flex;
-  justify-content: space-around;
-  margin: 50px auto;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.card {
-  width: 300px;
-  background: #f9f9f9;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-.card:hover {
-  transform: scale(1.05);
-}
-.card h2 {
-  margin-bottom: 10px;
-  text-align: center;
-}
-.dropdown {
-  display: none;
-  margin-top: 15px;
-}
-.dropdown p, .dropdown a {
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 10px;
-  display: block;
-  color: #333;
-  text-decoration: none;
-}
-.dropdown a:hover {
-  text-decoration: underline;
-}
-</style>
-
-<script>
-function toggleDropdown(id) {
-  const dropdown = document.getElementById(id);
-  const allDropdowns = document.querySelectorAll('.dropdown');
-  allDropdowns.forEach(d => {
-    if (d !== dropdown) d.style.display = "none";
-  });
-  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-}
-</script>
 
         <!-- Features Section -->
         <section id="features" class="features">
@@ -816,6 +765,33 @@ function toggleDropdown(id) {
             </div>
         </section>
 
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <h2>Get in Touch</h2>
+                    <p>Ready to revolutionize your Ayurvedic practice? Contact us to learn more about Project Anvay and how it can benefit your patients.</p>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required placeholder="Tell us about your practice and how we can help..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
     <footer>
         <div class="container">
             <p>&copy; 2025 Project Anvay. Bridging Ancient Wisdom with Modern Technology.</p>
@@ -823,6 +799,74 @@ function toggleDropdown(id) {
     </footer>
 
     <script>
+        // Voice Assistant Logic
+        const micBtn = document.getElementById("micBtn");
+        const output = document.getElementById("va-output");
+
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = "en-IN";
+            recognition.interimResults = false;
+
+            micBtn.addEventListener("click", () => {
+                recognition.start();
+                output.style.display = "block";
+                output.textContent = "🎤 Listening...";
+            });
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript.toLowerCase();
+                output.textContent = "You: " + transcript;
+
+                // Basic responses
+                let response = "Sorry, I didn't get that.";
+                if (transcript.includes("hello")) response = "Hello! I am Anvay Assistant, here to help you.";
+                if (transcript.includes("diet")) response = "Click on Generate Diet Plans to get your personalized Ayurvedic diet.";
+                if (transcript.includes("features")) response = "Key features include AI diet generation, voice assistant, and mobile support.";
+                if (transcript.includes("contact")) response = "You can reach us via the Contact section below.";
+                if (transcript.includes("home")) window.location.href = "#home";
+                if (transcript.includes("about")) window.location.href = "#about";
+                if (transcript.includes("contact")) window.location.href = "#contact";
+
+                // Speak back
+                const synth = window.speechSynthesis;
+                const utterance = new SpeechSynthesisUtterance(response);
+                synth.speak(utterance);
+
+                // Show assistant's response
+                setTimeout(() => {
+                    output.textContent = "Anvay: " + response;
+                }, 1000);
+            };
+
+            recognition.onerror = (event) => {
+                output.textContent = "Error: " + event.error;
+            };
+        } else {
+            micBtn.addEventListener("click", () => {
+                output.style.display = "block";
+                output.textContent = "Speech recognition not supported in this browser.";
+            });
+        }
+
+        // Flashcard functions
+        function toggleHerb(el) {
+            // Collapse all
+            document.querySelectorAll('.herb').forEach(h => h.classList.remove('active'));
+            // Expand selected
+            el.classList.add('active');
+        }
+
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            const allDropdowns = document.querySelectorAll('.dropdown');
+            allDropdowns.forEach(d => {
+                if (d !== dropdown) d.style.display = "none";
+            });
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
         // Mobile menu toggle
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
