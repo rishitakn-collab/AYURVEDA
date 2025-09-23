@@ -117,7 +117,7 @@
   <div class="login-card">
     <div class="login-icon">🌿</div>
     <h2>Login to Project Anvay</h2>
-    <form method="POST">
+    <form id="loginForm" method="POST">
       <div class="form-group">
         <label for="email">Email *</label>
         <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -133,10 +133,32 @@
       <button type="submit" class="submit-btn">Login</button>
     </form>
     <div class="login-footer">
-  <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
-  <p><a href="#">Forgot Password?</a></p>
-  <p><a href="index.html">← Back to Home</a></p>
-</div>
+      <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+      <p><a href="#">Forgot Password?</a></p>
+      <p><a href="index.html">← Back to Home</a></p>
+    </div>
   </div>
+
+  <script>
+    // Get the redirect URL from query parameters (default to index.html)
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectPage = urlParams.get('redirect') || 'index.html';
+
+    // Handle login form submission
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Example: Validate login here (you can replace with real logic)
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (email && password) {
+        // Redirect to the page specified in redirect query
+        window.location.href = redirectPage;
+      } else {
+        alert('Please enter email and password.');
+      }
+    });
+  </script>
 </body>
 </html>

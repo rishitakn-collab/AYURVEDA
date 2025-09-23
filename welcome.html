@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome - Project Anvay</title>
+
+<style>
+    /* ===== GLOBAL STYLES ===== */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#333; background:#fafafa; overflow:hidden; }
+    .container { max-width:1200px; margin:0 auto; padding:0 20px; }
+    header { background:linear-gradient(135deg,#4CAF50 0%,#45a049 100%); color:white; padding:1rem 0; position:fixed; width:100%; top:0; z-index:1000; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+    nav { display:flex; justify-content:space-between; align-items:center; }
+    .logo { font-size:1.8rem; font-weight:bold; }
+    .nav-links { display:flex; list-style:none; gap:2rem; }
+    .nav-links a { color:white; text-decoration:none; font-weight:500; transition:color 0.3s ease; }
+    .nav-links a:hover { color:#c8e6c9; }
+    .mobile-menu { display:none; flex-direction:column; cursor:pointer; }
+    .mobile-menu span { width:25px; height:3px; background:white; margin:3px 0; transition:0.3s; }
+
+    /* ===== HERO SECTION ===== */
+    main { margin-top:80px; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+    .welcome-hero { text-align:center; padding:3rem 1rem 2rem 1rem; flex-shrink:0; }
+    .welcome-hero h1 { font-size:3rem; color:#2e7d32; margin-bottom:1rem; }
+    .welcome-hero p { font-size:1.2rem; color:#555; max-width:700px; margin-bottom:1.5rem; }
+    .cta-button { display:inline-block; background:#4CAF50; color:white; padding:15px 30px; text-decoration:none; border-radius:5px; font-weight:bold; transition:background 0.3s ease; }
+    .cta-button:hover { background:#45a049; }
+
+    /* ===== GALLERY SECTION ===== */
+    .gallery-section { width:100%; flex-shrink:0; }
+    .gallery-container { position:relative; overflow:hidden; width:100%; mask:linear-gradient(90deg,transparent,black 10%,black 90%,transparent); -webkit-mask:linear-gradient(90deg,transparent,black 10%,black 90%,transparent); }
+    .gallery-track { display:flex; gap:2rem; animation:scroll 20s linear infinite; width:max-content; will-change:transform; }
+    @keyframes scroll { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+    .gallery-item { position:relative; min-width:300px; height:200px; border-radius:15px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.1); transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); cursor:pointer; }
+    .gallery-item:hover { transform:translateY(-8px) scale(1.05); box-shadow:0 20px 40px rgba(76,175,80,0.3); }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease; }
+    .gallery-item:hover img { transform:scale(1.1); }
+    .image-overlay { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(135deg, rgba(76,175,80,0.9), rgba(69,160,73,0.95)); color:white; padding:1rem; transform:translateY(100%); transition:transform 0.3s ease; }
+    .gallery-item:hover .image-overlay { transform:translateY(0); }
+    .image-overlay span { font-weight:600; font-size:1rem; text-shadow:0 2px 4px rgba(0,0,0,0.3); }
+
+    /* ===== FOOTER ===== */
+    footer { background:#2e7d32; color:white; text-align:center; padding:1rem 0; }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:768px){ .nav-links { display:none; position:absolute; top:100%; left:0; width:100%; background:#4CAF50; flex-direction:column; padding:1rem 0; } 
+    .nav-links.active{display:flex;} .mobile-menu{display:flex;} .welcome-hero h1{font-size:2.5rem;} .welcome-hero p{font-size:1.1rem;} .gallery-item{min-width:250px;height:160px;} .gallery-track{animation-duration:15s;} }
+    @media(max-width:480px){ .welcome-hero h1{font-size:2rem;} .gallery-item{min-width:220px;height:140px;} .gallery-track{animation-duration:12s;} }
+
+</style>
+</head>
+<body>
+
+<header>
+    <nav class="container">
+        <div class="logo">Project Anvay</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="login.html">Login</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+        <div class="mobile-menu" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="welcome-hero">
+        <h1>Revolutionizing Ayurvedic Diet Management</h1>
+        <p>Combining ancient wisdom with modern technology to create personalized, scientifically-backed Ayurvedic diet charts for optimal health and wellness.</p>
+        <a href="login.html?redirect=index.html" class="cta-button">Get Started →</a>
+    </section>
+
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-container">
+                <div class="gallery-track">
+                    <!-- Gallery Items -->
+                    <figure class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/4CAF50/white?text=Herbs+%26+Spices" alt="Ayurvedic Herbs" loading="lazy">
+                        <figcaption class="image-overlay"><span>Traditional Herbs</span></figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/45a049/white?text=Yoga+%26+Meditation" alt="Yoga Practice" loading="lazy">
+                        <figcaption class="image-overlay"><span>Yoga & Meditation</span></figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/66BB6A/white?text=Natural+Remedies" alt="Natural Remedies" loading="lazy">
+                        <figcaption class="image-overlay"><span>Natural Healing</span></figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/81C784/white?text=Ayurvedic+Diet" alt="Balanced Diet" loading="lazy">
+                        <figcaption class="image-overlay"><span>Balanced Diet</span></figcaption>
+                    </figure>
+                    <!-- Repeat same items for infinite scroll -->
+                    <figure class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/4CAF50/white?text=Herbs+%26+Spices" alt="Ayurvedic Herbs" loading="lazy">
+                        <figcaption class="image-overlay"><span>Traditional Herbs</span></figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/45a049/white?text=Yoga+%26+Meditation" alt="Yoga Practice" loading="lazy">
+                        <figcaption class="image-overlay"><span>Yoga & Meditation</span></figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Project Anvay. Bridging Ancient Wisdom with Modern Technology.</p>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    function toggleMenu(){ document.getElementById('navLinks').classList.toggle('active'); }
+    document.querySelectorAll('.nav-links a').forEach(link=>{ link.addEventListener('click',()=>{ document.getElementById('navLinks').classList.remove('active'); }); });
+
+    // Header scroll effect
+    window.addEventListener('scroll',()=>{ 
+        const header=document.querySelector('header'); 
+        if(window.scrollY>100){ header.style.background='linear-gradient(135deg, rgba(76,175,80,0.95) 0%, rgba(69,160,73,0.95) 100%)'; header.style.backdropFilter='blur(10px)'; }
+        else{ header.style.background='linear-gradient(135deg,#4CAF50 0%,#45a049 100%)'; header.style.backdropFilter='none'; } 
+    });
+
+    // Gallery Accessibility
+    document.addEventListener('DOMContentLoaded',()=>{
+        const galleryTrack=document.querySelector('.gallery-track');
+        const galleryItems=document.querySelectorAll('.gallery-item');
+        galleryItems.forEach((item,index)=>{
+            item.setAttribute('tabindex','0');
+            item.setAttribute('role','img');
+            item.setAttribute('aria-label',`Gallery image ${index+1}`);
+            item.addEventListener('focus',()=>{ galleryTrack.style.animationPlayState='paused'; });
+            item.addEventListener('blur',()=>{ galleryTrack.style.animationPlayState='running'; });
+            item.addEventListener('click',()=>{ console.log('Gallery item clicked:',item.querySelector('img').alt); });
+        });
+    });
+</script>
+
+</body>
+</html>
